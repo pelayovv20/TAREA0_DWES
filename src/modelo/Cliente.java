@@ -1,11 +1,19 @@
 package modelo;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Scanner;
+import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import javax.swing.text.DateFormatter;
 
 import utils.Utilidades;
@@ -134,7 +142,7 @@ public class Cliente implements Serializable {
 	
 	public static Cliente nuevoCliente() {
 		Scanner in = new Scanner (System.in);
-		Documentacion id;
+		Documentacion id = null;
 		String nombre;
 		String direccion;
 		String telefono;
@@ -252,13 +260,44 @@ public class Cliente implements Serializable {
 		
 		System.out.println();
 		
-	System.out.println("Cliente añadido");	
-	//return new Cliente(id,nombre,direccion,telefono,Date.valueOf(fechanac),suscripcion,pagoPref,new ArrayList<Notificacion>());
+	
+		
+	return new Cliente(id,nombre,direccion,telefono,Date.valueOf(fechanac),suscripcion,pagoPref,new ArrayList<Notificacion>());
+	
 		
 	
 		
 	}
 	
+	public static void infoClientes(ArrayList<Cliente> clientes) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter("clientes.txt"))){
+			for (Cliente c:clientes) {
+				String informacion = c.getNombre() + c.getId() + c.getFechaNac() + " Tfno: " + c.getTelefono() + " Dir: " + c.getDireccion();
+				writer.write(informacion);
+				writer.newLine();
+			}
+			System.out.println("Fichero clientes.txt");
+		}catch (FileNotFoundException ex) {
+			System.out.println(ex.getMessage());
+		}catch (IOException ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+	
+	
+	public int[] notificacionesEn(int año) {
+        int[] notificacionesMes = new int[12];
+        for (Notificacion notificacion : notificaciones) {
+            
+            if (notificacion.getFecha().getYear() == año) {
+                int mes = notificacion.getFecha().getMonthValue();
+                notificacionesMes[mes]++;
+            }
+        }
+
+        return notificacionesMes;
+
+}
 	
 	
 	
