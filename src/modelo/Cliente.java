@@ -252,10 +252,10 @@ public class Cliente implements Serializable {
 		
 		System.out.println();
 		
-		
+	System.out.println("Cliente añadido");	
 	//return new Cliente(id,nombre,direccion,telefono,Date.valueOf(fechanac),suscripcion,pagoPref,new ArrayList<Notificacion>());
 		
-		
+	
 		
 	}
 	
