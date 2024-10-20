@@ -162,7 +162,7 @@ public class Cliente implements Serializable {
 			tipoDocumento = in.nextLine().toUpperCase();
 			
 			
-		}while(!tipoDocumento.equals("NIE") || !tipoDocumento.equals("NIF"));
+		}while(!tipoDocumento.equals("NIE") && !tipoDocumento.equals("NIF"));
 		
 		boolean valido = false;
 		do {
@@ -258,7 +258,7 @@ public class Cliente implements Serializable {
 		}while (!valido);
 		
 		
-		System.out.println();
+		System.out.println("CLIENTE CREADO");
 		
 	
 		

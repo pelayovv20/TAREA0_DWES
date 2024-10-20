@@ -62,7 +62,7 @@ public class NIF extends Documentacion {
 	
 	@Override
 	public boolean validar() {
-			if (numero != null || numero.matches("||d{8}")) {
+			if (numero == null || !numero.matches("\\d{8}")) {
 				return false;
 			}
 			else {
